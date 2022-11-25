@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>AR show demo</title>
+    <script src="aframe.min.js"></script>
+    <script src="aframe-extras.loaders.min.js"></script>
+    <script src="aframe-look-at-component.min.js"></script>
+    <script src="aframe-ar-nft.js"></script>
+</head>
+
+<body>
+    <a-scene vr-mode-ui="enabled: false" arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+
+        <a-assets>
+            <!-- <img id="groundTex" src="assets/sand.jpg"> -->
+            <a-asset-item id="cactusModel" src="assets/cactus.glb"></a-asset-item>
+            <a-asset-item id="magnemiteModel" src="assets/magnemite/scene.gltf"></a-asset-item>
+            <a-asset-item id="BoomBoxModel" src="assets/BoomBox.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- 地面引导 -->
+        <a-entity position="0 0 0">
+
+        </a-entity>
+
+        <!-- 提前加载资源 -->
+        <a-entity position="0 -5 0" rotation="0 0 0" scale="1 1 1">
+            <a-box position="0.5 0 0" rotation="0 0 0" scale="1 0.1 0.1" color="#AA0000"></a-box>
+            <a-box position="0 0.5 0" rotation="0 0 0" scale="0.1 1 0.1" color="#00AA00"></a-box>
+            <a-box position="0 0 0.5" rotation="0 0 0" scale="0.1 0.1 1" color="#0000AA"></a-box>
+        </a-entity>
+
+        <a-entity gltf-model="#magnemiteModel" animation-mixer rotation="0 0 0" position="0 2 -5" scale="0.1 0.1 0.1">
+        </a-entity>
+
+        <a-entity gltf-model="#BoomBoxModel" animation-mixer rotation="0 -90 0" position="1 1.2 0" scale="10 10 10">
+        </a-entity>
+
+        <!-- <a-entity light="type: ambient; intensity: 0.8;"></a-entity> -->
+        <!-- <a-entity light="type: directional;
+                   castShadow: true;
+                   intensity: 0.4;
+                   shadowCameraVisible: true;" position="0 3 0" rotation="45 0 0"></a-entity> -->
+
+        <!-- 艺术展房间中心地面位置 -->
+        <a-entity id="artRoomFloorCenter" position="0 -15 -10" rotation="0 0 0" scale="10 10 10">
+            <!-- box 拼装一个 有门的房间 -->
+            <a-entity id="artRoom" position="0 1.5 0" rotation="0 0 0" scale="3 3 3">
+                <!-- 房间 体积 1x1x1  -->
+                <!-- 地板 -->
+                <a-box position="0 -0.5 0" rotation="0 0 0" scale="2 0.01 2" color="#999999"></a-box>
+                <!-- 房顶 -->
+                <a-box position="0 0.5 0" rotation="0 0 0" scale="1 0.01 1" color="#999999"></a-box>
+                <!-- 正面墙 -->
+                <a-box position="0 0 -0.5" rotation="0 0 0" scale="1 1 0.01" color="#999999"></a-box>
+                <!-- 左面墙 -->
+                <a-box position="-0.5 0 0" rotation="0 0 0" scale="0.01 1 1" color="#999999"></a-box>
+                <!-- 右面墙 -->
+                <a-box position="0.5 0 0" rotation="0 0 0" scale="0.01 1 1" color="#999999"></a-box>
+            </a-entity>
+
+            <!-- 描述文字 -->
+            <a-entity text="value: ArtRoom; align:center; width:0.9; color:white;" rotation="0 0 0" position="0 2.5 -1"
+                scale="5 5 5"></a-entity>
+
+
+            <!-- 房间内放置物品 -->
+            <a-entity gltf-model="#cactusModel" rotation="0 0 0" position="0 0 0" scale="0.5 0.5 0.5">
+            </a-entity>
+            <a-entity gltf-model="#cactusModel" rotation="0 0 0" position="1 0 0.3" scale="0.8 0.8 0.8">
+            </a-entity>
+            <a-entity gltf-model="#cactusModel" rotation="0 0 0" position="-0.6 0 0.8" scale="0.6 0.6 0.6">
+            </a-entity>
+            <a-entity gltf-model="#cactusModel" rotation="0 0 0" position="0.2 0 1.2" scale="0.7 0.7 0.7">
+            </a-entity>
+
+        </a-entity>
+
+        <!-- <a-camera gps-camera rotation-reader> </a-camera> -->
+
+        <!-- 禁止手机触摸渲染相机 -->
+        <a-camera id="camera" look-controls="touchEnabled:false;" fov="100"> </a-camera>
+    </a-scene>
+</body>
+
+</html>
